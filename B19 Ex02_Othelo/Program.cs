@@ -7,6 +7,6 @@ namespace B19_Ex02_Othelo
 {
     class Program
     {
-        ilan ah sheli hayakar
+        ilan ah sheli hayakar7r
     }
 }
