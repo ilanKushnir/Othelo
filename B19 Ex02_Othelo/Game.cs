@@ -16,16 +16,24 @@ namespace B19_Ex02_Othelo
 
         public Game()
         {
-            ilanMethod(out m_Player1, out m_Player2);       // player1 --> ePlayerColor.Black
+            string player1Name, player2Name;
+            int boardSize;
+            bool isMultiplayer;
 
-            m_Player1 = new Player(name1, ePlayerColor.Black);
-            m_Player2 = new Player(name2, ePlayerColor.White);
+            Display.initGame(out player1Name, out player2Name, out boardSize, out isMultiplayer);   
+            m_Player1 = new Player(player1Name, ePlayerColor.Black, false);
+            m_Player2 = new Player(player2Name, ePlayerColor.White, isMultiplayer);
+            m_gameBoard = new Board(boardSize);
+            m_CurrentPlayer = m_Player1;
+            Display.updateUI("asdfasfd", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
         }
 
         public void startGame()
         {
 
         }
+
+
 
         public bool isGameOver()
         {
@@ -78,4 +86,4 @@ namespace B19_Ex02_Othelo
  * public void endGame()
  * public void restartGame()
  * 
- * 
+ */

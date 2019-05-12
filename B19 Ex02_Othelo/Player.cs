@@ -17,14 +17,24 @@ namespace B19_Ex02_Othelo
     class Player
     {
 
-        public string       m_Name = null;
-        public int          m_Points = 0;
-        ePlayerColor        m_Color;
+        private string       m_Name = null;
+        private int          m_Points = 0;
+        private ePlayerColor m_Color;
+        private bool         m_isBot = false;
 
-        public Player(string i_Name, ePlayerColor i_Color)
+        public Player(string i_Name, ePlayerColor i_Color, bool i_isBot)
         {
             m_Name = i_Name;
             m_Color = i_Color;
+            m_isBot = i_isBot;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return m_Name;
+            }
         }
 
         public int Points
@@ -41,15 +51,3 @@ namespace B19_Ex02_Othelo
     }
 }
 
-/*
- * enum ePlayerColor
- * 
- * private String m_Name
- * private int points
- * 
- * public Player()
- * 
- * public String Name // set & get
- * public int Points // set & get
- * 
- */

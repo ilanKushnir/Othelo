@@ -9,6 +9,7 @@ namespace B19_Ex02_Othelo
     {
         public static void Main()
         {
+            Game x = new Game();
         }
 
     }
