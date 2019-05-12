@@ -7,5 +7,9 @@ namespace B19_Ex02_Othelo
 {
     class Program
     {
+        public static void Main()
+        {
+        }
+
     }
 }
