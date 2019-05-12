@@ -7,11 +7,18 @@ namespace B19_Ex02_Othelo
 {
     class Board
     {
+        private int m_BoardSize = 0;
+        private int[,] m_Board = null;
+        public bool m_BoardIsFull = false;
+
+        public int Size
+        {
+            get { return m_BoardSize; }
+            set { m_BoardSize = value; }
+        }
     }
 }
-/*  private int m_BoardSize
- *  private int[,] m_Board = null
- *  public bool m_BoardIsFull = false
+/*  
  *  
  * 
  * public Board(int i_BoardSize)
