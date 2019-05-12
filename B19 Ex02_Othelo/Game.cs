@@ -7,5 +7,8 @@ namespace B19_Ex02_Othelo
 {
     class Game
     {
+
     }
 }
+
+
