@@ -21,6 +21,13 @@ namespace B19_Ex02_Othelo
             get { return m_BoardSize; }
             set { m_BoardSize = value; }
         }
+/*
+        public Coordinates[] getLegalCoordinates(Player i_currentPlayer) { }
+        public void addToken(Player i_currentPlayer) { }
+        public void updatePoints() { }
+        public void restartBoard() { }
+        */
+
     }
 }
 /*  

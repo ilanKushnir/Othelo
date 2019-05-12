@@ -35,6 +35,12 @@ namespace B19_Ex02_Othelo
             return isLegalCoordinate(m_Row, m_Col, i_BoardSize);
         }
 
+        public static Coordinates parseCoordinates(string i_coordinatesStr)    //////////////////////////////
+        {
+            Coordinates o_Coordinates = null;
+            return o_Coordinates;
+        }
+
 
     }
 }

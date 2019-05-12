@@ -7,9 +7,9 @@ namespace B19_Ex02_Othelo
 {
     class Game
     {
-        public Player       m_Player1 = null;               // allways Black & takes first turn!
+        public Player       m_Player1 = null;               
         public Player       m_Player2 = null;
-        public Player       m_CurrentPlayer = null;         // ref??
+        public Player       m_CurrentPlayer = null;        
         private int         m_Player1LegalMovesCount = 0;
         private int         m_Player2LegalMovesCount = 0;
         Board               m_gameBoard;
@@ -30,7 +30,24 @@ namespace B19_Ex02_Othelo
 
         public void startGame()
         {
+            Coordinates[] legalCoordinates;
+            Coordinates playerCoordinates;
+            string coordinatesStr;
 
+            while(!isGameOver())
+            {
+               // legalCoordinates = m_gameBoard.getLegalCoordinates(m_CurrentPlayer);
+                Display.updateUI("{0}, Please choose cell you want to play" + m_CurrentPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                coordinatesStr = Console.ReadLine();
+                playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+
+              //  while(playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || Array.Find(legalCoordinates, c => c.m_Row == playerCoordinates.m_Row && c.m_Col == playerCoordinates.m_Col) != playerCoordinates)
+                {
+                    Display.updateUI("illegal cell choice, Please choose again" , m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                    coordinatesStr = Console.ReadLine();
+                    playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+                }
+            }
         }
 
 
