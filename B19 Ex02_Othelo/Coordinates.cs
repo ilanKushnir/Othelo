@@ -35,6 +35,13 @@ namespace B19_Ex02_Othelo
             return isLegalCoordinate(m_Row, m_Col, i_BoardSize);
         }
 
+        public static bool foundCoordinatesInArray(Coordinates i_Coordinates, Coordinates [] i_CoordinatesArray)
+        {
+            Coordinates FoundCoordinates;
+            FoundCoordinates = Array.Find(i_CoordinatesArray, c => c.m_Row == i_Coordinates.m_Row && c.m_Col == i_Coordinates.m_Col);
+            return FoundCoordinates.m_Col == i_Coordinates.m_Col && FoundCoordinates.m_Row == i_Coordinates.m_Row ;
+        }
+
         public static Coordinates parseCoordinates(string i_coordinatesStr)    //////////////////////////////
         {
             Coordinates o_Coordinates = null;

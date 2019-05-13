@@ -33,15 +33,17 @@ namespace B19_Ex02_Othelo
             Coordinates[] legalCoordinates;
             Coordinates playerCoordinates;
             string coordinatesStr;
+            bool isCoordinatesInArray;
 
             while(!isGameOver())
             {
-               // legalCoordinates = m_gameBoard.getLegalCoordinates(m_CurrentPlayer);
+                legalCoordinates = m_gameBoard.getLegalCoordinates(m_CurrentPlayer);
                 Display.updateUI("{0}, Please choose cell you want to play" + m_CurrentPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                 coordinatesStr = Console.ReadLine();
                 playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+                isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates); 
 
-              //  while(playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || Array.Find(legalCoordinates, c => c.m_Row == playerCoordinates.m_Row && c.m_Col == playerCoordinates.m_Col) != playerCoordinates)
+                while(playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || isCoordinatesInArray == false)
                 {
                     Display.updateUI("illegal cell choice, Please choose again" , m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                     coordinatesStr = Console.ReadLine();
@@ -49,8 +51,6 @@ namespace B19_Ex02_Othelo
                 }
             }
         }
-
-
 
         public bool isGameOver()
         {
