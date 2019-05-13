@@ -147,5 +147,42 @@ namespace B19_Ex02_Othelo
                 Console.WriteLine("{0}, you will play against the computer", i_player1);
             }
         }
+
+        public static bool printEndGame(Player i_WinningPlayer, Player i_player1, bool i_IsSinglePlayer)
+        {
+            char restartGame;
+
+            if(i_WinningPlayer == null)
+            {
+                printMessage("Its a tie!");
+            }
+            else if(i_IsSinglePlayer == true)
+            {
+                if(i_WinningPlayer == i_player1)
+                {
+                    printMessage("Congratulations {0}, you won!" + i_WinningPlayer);
+                }
+                else
+                {
+                    printMessage("{0} you lost, maybe next time" + i_player1);
+                }
+            }
+            else
+            {                                                                       // its multiplayer and its not a tie
+                printMessage("Congratulations {0}, you won!" + i_WinningPlayer);
+            }
+
+            printMessage("Restart Game?\ninsert y/n" + i_WinningPlayer);
+            restartGame = char.Parse(Console.ReadLine());
+
+            if(restartGame == 'y' || restartGame == 'Y')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 } 
