@@ -14,12 +14,24 @@ namespace B19_Ex02_Othelo
         public Board(int i_BoardSize)
         {
             m_BoardSize = i_BoardSize;
+            m_Board = new int[i_BoardSize, i_BoardSize];
+
+            // init middle tokens
+            m_Board[(m_BoardSize / 2) - 1, (m_BoardSize / 2) - 1] = -1;
+            m_Board[m_BoardSize / 2, m_BoardSize / 2] = -1;
+            m_Board[(m_BoardSize / 2) - 1, m_BoardSize / 2] = 1;
+            m_Board[m_BoardSize / 2, (m_BoardSize / 2) - 1] = 1;
         }
 
         public int Size
         {
             get { return m_BoardSize; }
             set { m_BoardSize = value; }
+        }
+
+        public int getTokenByMatrixCoordinate(int i_row, int i_col)
+        {
+            return m_Board[i_row, i_col];
         }
     }
 }

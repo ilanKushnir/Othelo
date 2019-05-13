@@ -37,7 +37,7 @@ namespace B19_Ex02_Othelo
         }
         public static void printTitle()
         {
-            Console.WriteLine("Welcome to Othelo game! - by Ofir & Ilan");
+            Console.WriteLine("Othelo - by Ofir & Ilan");
         }
         public static void printMessage(string message)
         {
@@ -45,12 +45,12 @@ namespace B19_Ex02_Othelo
         }
         public static void printStats(Player currentPlayer, Player player1, Player player2)
         {
-            Console.WriteLine("Turn: {0}, Player 1: {1}, Player 2: {2}", currentPlayer.Name, player1.Points, player2.Points);
+            Console.WriteLine("Turn: {0}, P1: {1}, P2: {2}", currentPlayer.Name, player1.Points, player2.Points);
         }
         public static void printBoard(Board i_Board)
         {
-            int i, j, k, boardSize = i_Board.Size;
-            char charToPrint = 'A';
+            int i, j, k, currentCellToken, boardSize = i_Board.Size;
+            char charToPrint = 'A', tokenToPrint;
 
             // Top line (Char coordinates)
             Console.Write("   ");
@@ -69,13 +69,27 @@ namespace B19_Ex02_Othelo
             // Counted lines section
             for (i = 0; i < boardSize; i++)
             {
-                Console.Write("{0} ", i);
+                Console.Write("{0} ", i + 1);
                 for (j = 0; j < boardSize; j++)
                 {
-                    Console.Write("|   ");
+                    currentCellToken = i_Board.getTokenByMatrixCoordinate(i, j);
+                    if(currentCellToken == -1)
+                    {
+                        charToPrint = 'O'; 
+                    }
+                    else if(currentCellToken == 1)
+                    {
+                        charToPrint = 'X';
+                    }
+                    else
+                    {
+                        charToPrint = ' ';
+                    }
+                    Console.Write("| {0} ", charToPrint);
                 }
                 Console.WriteLine("|");
 
+                // Print  line divider
                 Console.Write("  ");
                 for (k = 0; k < boardSize; k++)
                 {
@@ -97,12 +111,13 @@ namespace B19_Ex02_Othelo
             Console.WriteLine("Choose board size:");
             Console.WriteLine("1) 6x6");
             Console.WriteLine("2) 8x8");
-            i_BoardSize = int.Parse(Console.ReadLine());
-            while(i_BoardSize != 1 && i_BoardSize != 2)
+            int boardSizeChoice = int.Parse(Console.ReadLine());
+            while(boardSizeChoice != 1 && boardSizeChoice != 2)
             {
                 Console.WriteLine("Please choose 1 or 2");
-                i_BoardSize = int.Parse(Console.ReadLine());
+                boardSizeChoice = int.Parse(Console.ReadLine());
             }
+            i_BoardSize = boardSizeChoice == 1 ? 6 : 8;
 
             Display.printDivider(i_BoardSize);
 
