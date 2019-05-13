@@ -10,8 +10,6 @@ namespace B19_Ex02_Othelo
         public Player       m_Player1 = null;               
         public Player       m_Player2 = null;
         public Player       m_CurrentPlayer = null;        
-        private int         m_Player1LegalMovesCount = 0;
-        private int         m_Player2LegalMovesCount = 0;
         Board               m_gameBoard;
 
         public Game()
