@@ -28,15 +28,16 @@ namespace B19_Ex02_Othelo
 
         public void startGame()
         {
-            Coordinates[] legalCoordinates;
+            List<Coordinates> legalCoordinates;
             Coordinates playerCoordinates;
             string coordinatesStr;
             bool isCoordinatesInArray;
 
             while (isGameOver() == false)
             {
-                legalCoordinates = m_gameBoard.getLegalCurrentMovesArray(m_CurrentPlayer);      // check available options for next move
-                m_CurrentPlayer.LegalMovesCount = legalCoordinates.Length;
+                Player otherPlayer = (m_CurrentPlayer == m_Player1) ? m_Player2 : m_Player1;
+                legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);      // check available options for next move
+                m_CurrentPlayer.LegalMovesCount = legalCoordinates.Count;
 
                 if(m_CurrentPlayer.LegalMovesCount == 0)                                        // if no available moves the other player takes the turn
                 {
@@ -50,7 +51,7 @@ namespace B19_Ex02_Othelo
 
                 while (playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || isCoordinatesInArray == false)      // check player coordinates validity
                 {
-                    Display.updateUI("illegal cell choice, Please choose again", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                    Display.updateUI("illegal cell choice, Please choose again using format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                     coordinatesStr = Console.ReadLine();
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
                 }
@@ -72,7 +73,7 @@ namespace B19_Ex02_Othelo
             return false;
         }
 
-        public void endGame()                                       ///////////////////
+        public void endGame()            
         {
             bool restartGame = false;
             Player winningPlayer;

@@ -59,16 +59,52 @@ namespace B19_Ex02_Othelo
             return isLegalCoordinate(m_Row, m_Col, i_BoardSize);
         }
 
-        public static bool foundCoordinatesInArray(Coordinates i_Coordinates, Coordinates [] i_CoordinatesArray)
+        public static bool foundCoordinatesInArray(Coordinates i_Coordinates, List<Coordinates> i_CoordinatesArray)
         {
-            Coordinates FoundCoordinates;
-            FoundCoordinates = Array.Find(i_CoordinatesArray, c => c.m_Row == i_Coordinates.m_Row && c.m_Col == i_Coordinates.m_Col);
-            return FoundCoordinates.m_Col == i_Coordinates.m_Col && FoundCoordinates.m_Row == i_Coordinates.m_Row ;
+            foreach(Coordinates coordinate in i_CoordinatesArray)
+            {
+                if(coordinate.m_Row == i_Coordinates.m_Row && coordinate.m_Col == i_Coordinates.m_Col)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
-        public static Coordinates parseCoordinates(string i_coordinatesStr)    //////////////////////////////
+        public static Coordinates parseCoordinates(string i_coordinatesStr)    
         {
             Coordinates o_Coordinates = null;
+            int rowValue, collValue;
+            char row, coll;
+
+            row = i_coordinatesStr[0];
+            rowValue = row - '0' - 1;
+
+            if (i_coordinatesStr.Length > 2)
+            {
+                coll = i_coordinatesStr[2];
+            }
+            else
+            {
+                coll = i_coordinatesStr[1];
+            }
+
+            if(coll >= 'A' && coll <= 'H')
+            {
+                collValue = coll - 'A';
+            }
+            else if(coll >= 'a' && coll <= 'h')
+            {
+                collValue = coll - 'a';
+            }
+            else
+            {                                    // assuming that board measures issue (6*6 instead 8*8) or illegal value will be taken care of in 'isLegalCoordinate'
+                collValue = coll - '0' - 1;
+
+            }
+
+            o_Coordinates = new Coordinates(rowValue, collValue);
             return o_Coordinates;
         }
 
