@@ -24,6 +24,7 @@ namespace B19_Ex02_Othelo
             m_gameBoard = new Board(boardSize);
             m_CurrentPlayer = m_Player1;
             Display.updateUI("asdfasfd", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+            startGame();
         }
 
         public void startGame()
@@ -56,7 +57,7 @@ namespace B19_Ex02_Othelo
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
                 }
 
-                m_gameBoard.addToken(m_CurrentPlayer, playerCoordinates);       // mark chosen cell on board
+                //m_gameBoard.addToken(m_CurrentPlayer, playerCoordinates);       // mark chosen cell on board
                 switchPlayer();
             }
 
