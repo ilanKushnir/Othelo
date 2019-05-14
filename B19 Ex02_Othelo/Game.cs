@@ -23,6 +23,8 @@ namespace B19_Ex02_Othelo
             m_Player2 = new Player(player2Name, ePlayerColor.White, isMultiplayer);
             m_gameBoard = new Board(boardSize);
             m_CurrentPlayer = m_Player1;
+            /////////////////////////////////////////////
+            //legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);
             Display.updateUI("asdfasfd", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
             startGame();
         }
@@ -46,18 +48,26 @@ namespace B19_Ex02_Othelo
                 }
 
                 m_gameBoard.addCurrentLegalMovesToBoard(legalCoordinates);
-                Display.updateUI("{0}, Please choose cell in the following format: \n{Row number},{Col letter}" + m_CurrentPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
-                coordinatesStr = Console.ReadLine();
-                playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
-                isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
 
-                while (playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || isCoordinatesInArray == false)      // check player coordinates validity
+                if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)
                 {
-                    Display.updateUI("illegal cell choice, Please choose again using format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                    int randomCoordinateIndex = Random.Next(legalCoordinates.Count);
+                    playerCoordinates = legalCoordinates[randomCoordinateIndex]);
+                }
+                else
+                {
+                    Display.updateUI("{0}, Please choose cell in the following format: \n{Row number},{Col letter}" + m_CurrentPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                     coordinatesStr = Console.ReadLine();
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
-                }
+                    isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
 
+                    while (playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || isCoordinatesInArray == false)      // check player coordinates validity
+                    {
+                        Display.updateUI("illegal cell choice, Please choose again using format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                        coordinatesStr = Console.ReadLine();
+                        playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+                    }
+                }
                 m_gameBoard.addToken(m_CurrentPlayer, playerCoordinates);       // mark chosen cell on board
                 switchPlayer();
             }
