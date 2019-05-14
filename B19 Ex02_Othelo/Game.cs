@@ -45,6 +45,7 @@ namespace B19_Ex02_Othelo
                     switchPlayer();
                 }
 
+                m_gameBoard.addCurrentLegalMovesToBoard(legalCoordinates);
                 Display.updateUI("{0}, Please choose cell in the following format: \n{Row number},{Col letter}" + m_CurrentPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                 coordinatesStr = Console.ReadLine();
                 playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
