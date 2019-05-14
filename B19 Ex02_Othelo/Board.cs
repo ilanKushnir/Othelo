@@ -52,9 +52,9 @@ namespace B19_Ex02_Othelo
         {
             List<Coordinates> o_LegalMovesArray = new List<Coordinates>(); ;
 
-            for(int i = 1; i < m_BoardSize-1; i++)
+            for (int i = 1; i < m_BoardSize - 1; i++)
             {
-                for (int j = 1; j < m_BoardSize-1; j++)
+                for (int j = 1; j < m_BoardSize - 1; j++)
                 {
                     List<Coordinates> o_LegalSurroundingCoordinates = new List<Coordinates>();
                     Coordinates coordinateToCheck = new Coordinates(-1, -1);
@@ -62,10 +62,10 @@ namespace B19_Ex02_Othelo
 
                     coordinateToCheck.Row = i;
                     coordinateToCheck.Col = j;
-                    if(m_Board[i,j] == (int)i_otherPlayer.Color)
+                    if (m_Board[i, j] == (int)i_otherPlayer.Color)
                     {
 
-                        if((legalCoordinate = getLegalCoordinateForDirection(
+                        if ((legalCoordinate = getLegalCoordinateForDirection(
                                               coordinateToCheck,
                                               i_currentPlayer,
                                               i_otherPlayer,
@@ -137,11 +137,29 @@ namespace B19_Ex02_Othelo
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
+                        // Add legal surrounding coordinates to legal moves array
+                        foreach (Coordinates surroundingCoordinate in o_LegalSurroundingCoordinates)
+                        {
+                            bool existsInArray = false;
+                            foreach (Coordinates legalMove in o_LegalMovesArray)
+                            {
+                                if (surroundingCoordinate.Equals(legalMove))
+                                {
+                                    existsInArray = true;
+                                }
+                            }
+
+                            if (existsInArray == false)
+                            {
+                                o_LegalMovesArray.Add(surroundingCoordinate);
+                            }
+                        }
+
                     }
                 }
             }
 
-            i_currentPlayer.LegaLMovesCount = o_LegalMovesArray.Count;
+            i_currentPlayer.LegalMovesCount = o_LegalMovesArray.Count;
             return o_LegalMovesArray;
         }
 
@@ -150,10 +168,10 @@ namespace B19_Ex02_Othelo
                                          Player i_otherPlayer,
                                          int N, int S, int E, int W)
         {
-            Coordinates inDirection = new Coordinates(i_CoordinateToCheck.Row + (N + S),
-                                                      i_CoordinateToCheck.Col + (E + W));
-            Coordinates counterDirection = new Coordinates(i_CoordinateToCheck.Row - (N + S),
-                                                           i_CoordinateToCheck.Col - (E + W));
+            Coordinates inDirection = new Coordinates(i_CoordinateToCheck.Row + (S - N),
+                                                      i_CoordinateToCheck.Col + (E - W));
+            Coordinates counterDirection = new Coordinates(i_CoordinateToCheck.Row - (S - N),
+                                                           i_CoordinateToCheck.Col - (E - W));
 
             if (getTokenByMatrixCoordinate(inDirection) == 0 ||
                 getTokenByMatrixCoordinate(counterDirection) != 0)
@@ -161,10 +179,20 @@ namespace B19_Ex02_Othelo
                 return null;
             }
 
-            //////// check direction
+            for (int row = inDirection.Row; row < m_BoardSize; row += (S - N))
+            {
+                for (int col = inDirection.Col; col < m_BoardSize; col += (E - W))
+                {
+                    if (m_Board[row, col] == (int)i_currentPlayer.Color)
+                    {
+                        return counterDirection;
+                    }
+                }
+            }
 
-            return counterDirection;
+            return null;
         }
+    }
 }
 /*  
  *  
