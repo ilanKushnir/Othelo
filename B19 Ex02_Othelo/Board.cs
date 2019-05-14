@@ -9,7 +9,7 @@ namespace B19_Ex02_Othelo
     {
         private int m_BoardSize = 0;
         private int[,] m_Board = null;
-        public bool m_BoardIsFull = false;
+        private bool m_BoardIsFull = false;
 
         public Board(int i_BoardSize)
         {
@@ -28,6 +28,15 @@ namespace B19_Ex02_Othelo
             get { return m_BoardSize; }
             set { m_BoardSize = value; }
         }
+
+        public bool BoardFull
+        {
+            get
+            {
+                return m_BoardIsFull;
+            }
+        }
+
 
         public int getTokenByMatrixCoordinate(int i_row, int i_col)
         {

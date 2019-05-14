@@ -23,6 +23,7 @@ namespace B19_Ex02_Othelo
         private bool         m_isBot = false;
         private int          m_LegalMovesCount = 0;
 
+
         public Player(string i_Name, ePlayerColor i_Color, bool i_isBot)
         {
             m_Name = i_Name;
@@ -58,7 +59,7 @@ namespace B19_Ex02_Othelo
             }
         }
 
-        public int LegaLMovesCount
+        public int LegalMovesCount
         {
             get
             {
@@ -67,6 +68,14 @@ namespace B19_Ex02_Othelo
             set
             {
                 m_LegalMovesCount = value;
+            }
+        }
+
+        public bool IsBot
+        {
+            get
+            {
+                return m_isBot;
             }
         }
     }
