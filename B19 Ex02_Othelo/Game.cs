@@ -62,14 +62,16 @@ namespace B19_Ex02_Othelo
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
                     isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
 
-                    while (playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false || isCoordinatesInArray == false)      // check player coordinates validity
+                    while (isCoordinatesInArray == false|| playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false)      // check player coordinates validity
                     {
                         Display.updateUI("illegal cell choice, Please choose again using format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                         coordinatesStr = Console.ReadLine();
                         playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+                        isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
                     }
                 }
                 m_gameBoard.addToken(m_CurrentPlayer, otherPlayer, playerCoordinates);       // mark chosen cell on board
+                updatePoints();
                 Display.updateUI("", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                 switchPlayer();
             }
@@ -137,6 +139,35 @@ namespace B19_Ex02_Othelo
             else
             {
                 m_CurrentPlayer = m_Player1;
+            }
+        }
+
+        private void updatePoints()
+        {
+            int black = 0;
+            int white = 0;
+
+            for(int i = 0; i < m_gameBoard.Size; i++)
+            {
+                for (int j = 0; j < m_gameBoard.Size; j++)
+                {
+                    if(m_gameBoard.getTokenByMatrixCoordinate(i,j) == 1)
+                    {
+                        black++;
+                    }
+                    if (m_gameBoard.getTokenByMatrixCoordinate(i, j) == -1)
+                    {
+                        white++;
+                    }
+                }
+            }
+
+            m_Player1.Points = m_Player1.Color.Equals(ePlayerColor.Black) ? black : white;
+            m_Player2.Points = m_Player2.Color.Equals(ePlayerColor.Black) ? black : white;
+
+            if (black + white == m_gameBoard.Size * m_gameBoard.Size)
+            {
+                m_gameBoard.BoardFull = true;
             }
         }
     }

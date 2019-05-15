@@ -45,7 +45,7 @@ namespace B19_Ex02_Othelo
         }
         public static void printStats(Player currentPlayer, Player player1, Player player2)
         {
-            Console.WriteLine("Turn: {0}, P1: {1}, P2: {2}", currentPlayer.Name, player1.Points, player2.Points);
+            Console.WriteLine("Turn:{0} || Points: P1:{1}, P2:{2}", currentPlayer.Name, player1.Points, player2.Points);
         }
         public static void printBoard(Board i_Board)
         {

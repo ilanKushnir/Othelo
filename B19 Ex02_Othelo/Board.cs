@@ -35,6 +35,10 @@ namespace B19_Ex02_Othelo
             {
                 return m_BoardIsFull;
             }
+            set
+            {
+                m_BoardIsFull = value;
+            }
         }
 
 

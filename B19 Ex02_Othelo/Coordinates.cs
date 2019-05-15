@@ -61,6 +61,12 @@ namespace B19_Ex02_Othelo
 
         public static bool foundCoordinatesInArray(Coordinates i_Coordinates, List<Coordinates> i_CoordinatesArray)
         {
+
+            if(i_Coordinates == null)
+            {
+                return false;
+            }
+
             foreach(Coordinates coordinate in i_CoordinatesArray)
             {
                 if(coordinate.m_Row == i_Coordinates.m_Row && coordinate.m_Col == i_Coordinates.m_Col)
@@ -74,6 +80,11 @@ namespace B19_Ex02_Othelo
 
         public static Coordinates parseCoordinates(string i_coordinatesStr)    
         {
+            if (i_coordinatesStr.Length < 2)
+            {
+                return null;
+            }
+
             Coordinates o_Coordinates = null;
             int rowValue, collValue;
             char row, coll;
