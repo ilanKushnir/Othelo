@@ -48,9 +48,17 @@ namespace B19_Ex02_Othelo
             return m_Board[i_coordinates.Row, i_coordinates.Col];
         }
 
+        public void addCurrentLegalMovesToBoard(List<Coordinates> i_currentLegalMovesArray)
+        {
+            foreach(Coordinates legalMove in i_currentLegalMovesArray)
+            {
+                m_Board[legalMove.Row, legalMove.Col] = '•';
+            }
+        }
+
         public List<Coordinates> getCurrentLegalMovesArray(Player i_currentPlayer, Player i_otherPlayer)
         {
-            List<Coordinates> o_LegalMovesArray = new List<Coordinates>(); ;
+            List<Coordinates> o_LegalMovesArray = new List<Coordinates>();
 
             for (int i = 1; i < m_BoardSize - 1; i++)
             {
@@ -154,12 +162,10 @@ namespace B19_Ex02_Othelo
                                 o_LegalMovesArray.Add(surroundingCoordinate);
                             }
                         }
-
                     }
                 }
             }
 
-            i_currentPlayer.LegalMovesCount = o_LegalMovesArray.Count;
             return o_LegalMovesArray;
         }
 
@@ -183,6 +189,11 @@ namespace B19_Ex02_Othelo
             {
                 for (int col = inDirection.Col; col < m_BoardSize; col += (E - W))
                 {
+                    if (m_Board[row, col] == 0)
+                    {
+                        return null;
+                    }
+
                     if (m_Board[row, col] == (int)i_currentPlayer.Color)
                     {
                         return counterDirection;
