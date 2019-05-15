@@ -21,7 +21,7 @@ namespace B19_Ex02_Othelo
         private int          m_Points = 0;
         private ePlayerColor m_Color;
         private bool         m_isBot = false;
-        private int          m_LegalMovesCount = 0;
+        private int          m_LegalMovesCount = 1;
 
 
         public Player(string i_Name, ePlayerColor i_Color, bool i_isBot)

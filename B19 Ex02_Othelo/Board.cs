@@ -52,7 +52,7 @@ namespace B19_Ex02_Othelo
         {
             foreach(Coordinates legalMove in i_currentLegalMovesArray)
             {
-                m_Board[legalMove.Row, legalMove.Col] = '•';
+                m_Board[legalMove.Row, legalMove.Col] = 2;      // '•' on console
             }
         }
 
@@ -180,7 +180,9 @@ namespace B19_Ex02_Othelo
                                                            i_CoordinateToCheck.Col - (E - W));
 
             if (getTokenByMatrixCoordinate(inDirection) == 0 ||
-                getTokenByMatrixCoordinate(counterDirection) != 0)
+                getTokenByMatrixCoordinate(inDirection) == 2 ||
+                (getTokenByMatrixCoordinate(counterDirection) != 0 &&
+                getTokenByMatrixCoordinate(counterDirection) != 2))
             {
                 return null;
             }
@@ -189,7 +191,7 @@ namespace B19_Ex02_Othelo
             {
                 for (int col = inDirection.Col; col < m_BoardSize; col += (E - W))
                 {
-                    if (m_Board[row, col] == 0)
+                    if (m_Board[row, col] == 0 || m_Board[row, col] == 2)
                     {
                         return null;
                     }
@@ -203,6 +205,57 @@ namespace B19_Ex02_Othelo
 
             return null;
         }
+
+        public void addToken(Player i_CurrentPlayer, Player i_OtherPlayer, Coordinates i_ChosenCoordinates)
+        {                                                                                  // check all 8 directions and flip opponent's cells
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 1, 0, 0, 0);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 1, 0, 1, 0);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 0, 1, 0);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 1, 1, 0);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 1, 0, 0);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 1, 0, 1);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 0, 0, 1);
+          flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 1, 0, 0, 1);
+        }
+
+        private void flipCells(Coordinates i_ChosenCoordinates, Player i_CurrentPlayer, Player i_OtherPlayer, int N, int S, int E, int W)
+        {
+            int row, coll;
+            bool flip = false;
+            List<Coordinates> cellsToFlip = new List<Coordinates>();
+
+            row = i_ChosenCoordinates.Row + (S - N);
+            coll = i_ChosenCoordinates.Col + (E - W);
+
+            while(row <= m_BoardSize - 1 && coll <= m_BoardSize - 1)        // checks for opponent's cells to flip
+            {
+                if (m_Board[row, coll] == 2 || m_Board[row, coll] == 0)    
+                {
+                    break;
+                }
+                else if(m_Board[row, coll] == (int)i_OtherPlayer.Color)
+                {
+                    cellsToFlip.Add(new Coordinates(row, coll));
+                }
+                else if(m_Board[row, coll] == (int)i_CurrentPlayer.Color)
+                {
+                    flip = true;
+                    break;
+                }
+
+                row += (S - N);
+                coll += (E - W); 
+            }
+
+            if(flip == true)
+            {
+                foreach(Coordinates coordinate in cellsToFlip)
+                {
+                    m_Board[coordinate.Row, coordinate.Col] = (int)i_CurrentPlayer.Color;
+                }
+            }
+        }
+
     }
 }
 /*  

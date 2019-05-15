@@ -50,7 +50,7 @@ namespace B19_Ex02_Othelo
         public static void printBoard(Board i_Board)
         {
             int i, j, k, currentCellToken, boardSize = i_Board.Size;
-            char charToPrint = 'A', tokenToPrint;
+            char charToPrint = 'A';
 
             // Top line (Char coordinates)
             Console.Write("   ");
@@ -80,6 +80,10 @@ namespace B19_Ex02_Othelo
                     else if(currentCellToken == 1)
                     {
                         charToPrint = 'X';
+                    }
+                    else if(currentCellToken == 2)
+                    {
+                        charToPrint = '=';
                     }
                     else
                     {

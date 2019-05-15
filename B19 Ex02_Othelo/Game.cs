@@ -20,12 +20,12 @@ namespace B19_Ex02_Othelo
 
             Display.initGame(out player1Name, out player2Name, out boardSize, out isMultiplayer);   
             m_Player1 = new Player(player1Name, ePlayerColor.Black, false);
-            m_Player2 = new Player(player2Name, ePlayerColor.White, isMultiplayer);
+            m_Player2 = new Player(player2Name, ePlayerColor.White, !isMultiplayer);
             m_gameBoard = new Board(boardSize);
             m_CurrentPlayer = m_Player1;
             /////////////////////////////////////////////
             //legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);
-            Display.updateUI("asdfasfd", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+            Display.updateUI("Game is set, please wait a second", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
             startGame();
         }
 
@@ -45,18 +45,21 @@ namespace B19_Ex02_Othelo
                 if(m_CurrentPlayer.LegalMovesCount == 0)                                        // if no available moves the other player takes the turn
                 {
                     switchPlayer();
+                    legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);      // check available options for next move
+                    m_CurrentPlayer.LegalMovesCount = legalCoordinates.Count;
                 }
 
                 m_gameBoard.addCurrentLegalMovesToBoard(legalCoordinates);
 
                 if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)
                 {
-                    int randomCoordinateIndex = Random.Next(legalCoordinates.Count);
-                    playerCoordinates = legalCoordinates[randomCoordinateIndex]);
+                    Random random = new Random();
+                    int randomCoordinateIndex = random.Next(legalCoordinates.Count);     // -1 ???
+                    playerCoordinates = legalCoordinates[randomCoordinateIndex];
                 }
                 else
                 {
-                    Display.updateUI("{0}, Please choose cell in the following format: \n{Row number},{Col letter}" + m_CurrentPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                    Display.updateUI(m_CurrentPlayer.Name + " , Please choose cell in the following format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                     coordinatesStr = Console.ReadLine();
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
                     isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
@@ -68,7 +71,7 @@ namespace B19_Ex02_Othelo
                         playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
                     }
                 }
-                m_gameBoard.addToken(m_CurrentPlayer, playerCoordinates);       // mark chosen cell on board
+                m_gameBoard.addToken(m_CurrentPlayer, otherPlayer, playerCoordinates);       // mark chosen cell on board
                 switchPlayer();
             }
 
@@ -122,7 +125,7 @@ namespace B19_Ex02_Othelo
             m_Player1.LegalMovesCount = 0;
             m_Player2.Points = 0;
             m_Player2.LegalMovesCount = 0;
-            Display.updateUI("New game! {0} takes first turn" + i_WinningPlayer, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+            Display.updateUI("New game! {0} takes first turn" + i_WinningPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
             this.startGame();
         }
 
