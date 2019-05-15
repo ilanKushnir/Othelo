@@ -49,7 +49,7 @@ namespace B19_Ex02_Othelo
 
                 m_gameBoard.addCurrentLegalMovesToBoard(legalCoordinates);
 
-                if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)
+                if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)                    // if its computer's turn on single player
                 {
                     Random random = new Random();
                     int randomCoordinateIndex = random.Next(legalCoordinates.Count);     // -1 ???
