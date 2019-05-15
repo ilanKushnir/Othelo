@@ -23,8 +23,6 @@ namespace B19_Ex02_Othelo
             m_Player2 = new Player(player2Name, ePlayerColor.White, !isMultiplayer);
             m_gameBoard = new Board(boardSize);
             m_CurrentPlayer = m_Player1;
-            /////////////////////////////////////////////
-            //legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);
             Display.updateUI("Game is set, please wait a second", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
             startGame();
         }
@@ -72,6 +70,7 @@ namespace B19_Ex02_Othelo
                     }
                 }
                 m_gameBoard.addToken(m_CurrentPlayer, otherPlayer, playerCoordinates);       // mark chosen cell on board
+                Display.updateUI("", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                 switchPlayer();
             }
 

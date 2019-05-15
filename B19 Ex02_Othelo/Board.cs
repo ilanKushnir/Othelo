@@ -187,9 +187,28 @@ namespace B19_Ex02_Othelo
                 return null;
             }
 
-            for (int row = inDirection.Row; row < m_BoardSize; row += (S - N))
+            int row = inDirection.Row, col = inDirection.Col;
+            while((row < m_BoardSize) && (row >= 0) && (col < m_BoardSize) && (col >= 0))
             {
-                for (int col = inDirection.Col; col < m_BoardSize; col += (E - W))
+                if (m_Board[row, col] == 0 || m_Board[row, col] == 2)
+                {
+                    return null;
+                }
+
+                if (m_Board[row, col] == (int)i_currentPlayer.Color)
+                {
+                    return counterDirection;
+                }
+
+                row += (S - N);
+                col += (E - W);
+            }
+/*
+            for (()
+
+            for (int row = inDirection.Row; (row < m_BoardSize) && (row >= 0); row += (S - N))
+            {
+                for (int col = inDirection.Col; (col < m_BoardSize) && (col >=0); col += (E - W))
                 {
                     if (m_Board[row, col] == 0 || m_Board[row, col] == 2)
                     {
@@ -200,9 +219,19 @@ namespace B19_Ex02_Othelo
                     {
                         return counterDirection;
                     }
+
+                    if (E == 0 && W ==0)
+                    {
+                        break;
+                    }
+                }
+
+                if (N == 0 && S == 0)
+                {
+                    break;
                 }
             }
-
+            */
             return null;
         }
 
@@ -216,6 +245,19 @@ namespace B19_Ex02_Othelo
           flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 1, 0, 1);
           flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 0, 0, 1);
           flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 1, 0, 0, 1);
+
+            for (int i = 0; i < m_BoardSize; i++)       // remove legal moves from board
+            {
+                for(int j = 0; j < m_BoardSize; j++)
+                {
+                    if(m_Board[i, j] == 2)
+                    {
+                        m_Board[i, j] = 0;
+                    }
+                }
+            }
+
+            m_Board[i_ChosenCoordinates.Row, i_ChosenCoordinates.Col] = (int)i_CurrentPlayer.Color;
         }
 
         private void flipCells(Coordinates i_ChosenCoordinates, Player i_CurrentPlayer, Player i_OtherPlayer, int N, int S, int E, int W)
@@ -227,7 +269,7 @@ namespace B19_Ex02_Othelo
             row = i_ChosenCoordinates.Row + (S - N);
             coll = i_ChosenCoordinates.Col + (E - W);
 
-            while(row <= m_BoardSize - 1 && coll <= m_BoardSize - 1)        // checks for opponent's cells to flip
+            while(row < m_BoardSize && row >= 0 && coll < m_BoardSize && coll >= 0)        // checks for opponent's cells to flip
             {
                 if (m_Board[row, coll] == 2 || m_Board[row, coll] == 0)    
                 {
