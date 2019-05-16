@@ -53,6 +53,8 @@ namespace B19_Ex02_Othelo
                 // if its computer's turn on single player
                 if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)
                 {
+                    Display.updateUI("Computer's turn." + Environment.NewLine + "choosing coordinates...", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                    RandomWait(1, 3);
                     Random random = new Random();
                     int randomCoordinateIndex = random.Next(legalCoordinates.Count);
                     playerCoordinates = legalCoordinates[randomCoordinateIndex];
@@ -181,6 +183,14 @@ namespace B19_Ex02_Othelo
             {
                 m_gameBoard.BoardFull = true;
             }
+        }
+
+        public void RandomWait(int minWait, int maxWait)
+        {
+            Console.WriteLine("Computer is thinking......");
+            Random random = new Random();
+            int miliSecondsToWait = random.Next(minWait, maxWait);
+            System.Threading.Thread.Sleep(miliSecondsToWait * 1000);
         }
     }
 }
