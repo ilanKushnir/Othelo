@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B19_Ex02_Othelo
 {
-    class Display
+    public class Display
     {
         public static void printUI(string message, Player currentPlayer, Player player1, Player player2, Board gameBoard)
         {
@@ -30,7 +30,7 @@ namespace B19_Ex02_Othelo
 
         public static string getDividerString(int boardSize = 0)
         {
-            string dividerString = "";
+            string dividerString = string.Empty;
 
             if (boardSize != 0)
             {
@@ -39,6 +39,7 @@ namespace B19_Ex02_Othelo
                 {
                     dividerString += "----";
                 }
+
                 dividerString += "-";
             }
             
@@ -46,28 +47,32 @@ namespace B19_Ex02_Othelo
 
             return dividerString;
         }
+
         public static string getTitleString()
         {
             return "Othelo - by Ofir & Ilan" + Environment.NewLine;
         }
+
         public static void printMessage(string message)
         {
             Console.WriteLine("Message: {0}", message);
         }
+
         public static string getStatsString(Player currentPlayer, Player player1, Player player2)
         {
-            string statsString = "Turn:" + currentPlayer.Name + "" +
+            string statsString = "Turn:" + currentPlayer.Name + string.Empty +
                                  " || Points: P1:" + player1.Points + 
                                  ", P2:" + player1.Points
                                  + Environment.NewLine;
 
             return statsString;
         }
+
         public static string getBoardString(Board i_Board)
         {
             int i, j, k, currentCellToken, boardSize = i_Board.Size;
             char charToPrint = 'A';
-            string boardString = "";
+            string boardString = string.Empty;
 
             // Top line (Char coordinates)
             boardString += "   ";
@@ -75,18 +80,20 @@ namespace B19_Ex02_Othelo
             {
                 boardString += " " + charToPrint++ + "  ";
             }
+
             boardString += Environment.NewLine;
             boardString += "  =";
             for (i = 0; i < boardSize; i++)
             {
                 boardString += "====";
             }
+
             boardString += Environment.NewLine;
 
             // Counted lines section
             for (i = 0; i < boardSize; i++)
             {
-                boardString += "" + (i + 1) + " ";
+                boardString += string.Empty + (i + 1) + " ";
                 for (j = 0; j < boardSize; j++)
                 {
                     currentCellToken = i_Board.getTokenByMatrixCoordinate(i, j);
@@ -106,8 +113,10 @@ namespace B19_Ex02_Othelo
                     {
                         charToPrint = ' ';
                     }
+
                     boardString += "| " + charToPrint + " ";
                 }
+
                 boardString += "|" + Environment.NewLine;
 
                 // Print  line divider
@@ -116,12 +125,13 @@ namespace B19_Ex02_Othelo
                 {
                     boardString += "====";
                 }
+
                 boardString += "=" + Environment.NewLine;
             }
 
             return boardString;
-
         }
+
         public static void updateUI(string message, Player currentPlayer, Player player1, Player player2, Board gameBoard)
         {
             // Delay if bot's turn
@@ -140,6 +150,7 @@ namespace B19_Ex02_Othelo
                 Console.WriteLine("Please choose 1 or 2");
                 boardSizeChoice = int.Parse(Console.ReadLine());
             }
+
             i_BoardSize = boardSizeChoice == 1 ? 6 : 8;
 
             Display.printDivider(i_BoardSize);
@@ -153,6 +164,7 @@ namespace B19_Ex02_Othelo
                 Console.WriteLine("Please choose 1 or 2");
                 isMultiplayerInput = int.Parse(Console.ReadLine());
             }
+
             i_isMultiplayer = isMultiplayerInput == 1 ? false : true;
 
             Display.printDivider(i_BoardSize);

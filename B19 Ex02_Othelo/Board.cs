@@ -35,12 +35,12 @@ namespace B19_Ex02_Othelo
             {
                 return m_BoardIsFull;
             }
+
             set
             {
                 m_BoardIsFull = value;
             }
         }
-
 
         public int getTokenByMatrixCoordinate(int i_row, int i_col)
         {
@@ -76,75 +76,66 @@ namespace B19_Ex02_Othelo
                     coordinateToCheck.Col = j;
                     if (m_Board[i, j] == (int)i_otherPlayer.Color)
                     {
-
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              1, 0, 0, 0)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              1, 0, 0, 0)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              1, 0, 1, 0)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              1, 0, 1, 0)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              0, 0, 1, 0)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              0, 0, 1, 0)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              0, 1, 1, 0)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              0, 1, 1, 0)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              0, 1, 0, 0)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              0, 1, 0, 0)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              0, 1, 0, 1)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              0, 1, 0, 1)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              0, 0, 0, 1)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              0, 0, 0, 1)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
 
-                        if ((legalCoordinate = getLegalCoordinateForDirection(
-                                              coordinateToCheck,
-                                              i_currentPlayer,
-                                              i_otherPlayer,
-                                              1, 0, 0, 1)) != null)
+                        if ((legalCoordinate = getLegalCoordinateForDirection(coordinateToCheck,
+                                                                              i_currentPlayer,
+                                                                              i_otherPlayer,
+                                                                              1, 0, 0, 1)) != null)
                         {
                             o_LegalSurroundingCoordinates.Add(legalCoordinate);
                         }
@@ -173,15 +164,14 @@ namespace B19_Ex02_Othelo
             return o_LegalMovesArray;
         }
 
-        private Coordinates getLegalCoordinateForDirection(Coordinates i_CoordinateToCheck,
-                                         Player i_currentPlayer,
-                                         Player i_otherPlayer,
-                                         int N, int S, int E, int W)
+        private Coordinates getLegalCoordinateForDirection(Coordinates i_CoordinateToCheck, Player i_currentPlayer, Player i_otherPlayer, int N, int S, int E, int W)
         {
-            Coordinates inDirection = new Coordinates(i_CoordinateToCheck.Row + (S - N),
-                                                      i_CoordinateToCheck.Col + (E - W));
-            Coordinates counterDirection = new Coordinates(i_CoordinateToCheck.Row - (S - N),
-                                                           i_CoordinateToCheck.Col - (E - W));
+            Coordinates inDirection = new Coordinates(
+                                                        i_CoordinateToCheck.Row + (S - N),
+                                                        i_CoordinateToCheck.Col + (E - W));
+            Coordinates counterDirection = new Coordinates(
+                                                            i_CoordinateToCheck.Row - (S - N),
+                                                            i_CoordinateToCheck.Col - (E - W));
 
             if (getTokenByMatrixCoordinate(inDirection) == 0 ||
                 getTokenByMatrixCoordinate(inDirection) == 2 ||
@@ -204,8 +194,8 @@ namespace B19_Ex02_Othelo
                     return counterDirection;
                 }
 
-                row += (S - N);
-                col += (E - W);
+                row += S - N;
+                col += E - W;
             }
 
             return null;
@@ -222,7 +212,8 @@ namespace B19_Ex02_Othelo
           flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 0, 0, 0, 1);
           flipCells(i_ChosenCoordinates, i_CurrentPlayer, i_OtherPlayer, 1, 0, 0, 1);
 
-            for (int i = 0; i < m_BoardSize; i++)       // remove legal moves from board
+            // remove legal moves from board
+            for (int i = 0; i < m_BoardSize; i++)
             {
                 for(int j = 0; j < m_BoardSize; j++)
                 {
@@ -245,7 +236,8 @@ namespace B19_Ex02_Othelo
             row = i_ChosenCoordinates.Row + (S - N);
             coll = i_ChosenCoordinates.Col + (E - W);
 
-            while(row < m_BoardSize && row >= 0 && coll < m_BoardSize && coll >= 0)        // checks for opponent's cells to flip
+            // checks for opponent's cells to flip
+            while (row < m_BoardSize && row >= 0 && coll < m_BoardSize && coll >= 0)
             {
                 if (m_Board[row, coll] == 2 || m_Board[row, coll] == 0)    
                 {
@@ -261,8 +253,8 @@ namespace B19_Ex02_Othelo
                     break;
                 }
 
-                row += (S - N);
-                coll += (E - W); 
+                row += S - N;
+                coll += E - W; 
             }
 
             if(flip == true)
@@ -273,18 +265,5 @@ namespace B19_Ex02_Othelo
                 }
             }
         }
-
     }
 }
-/*  
- *  
- * 
- * public Board(int i_BoardSize)
- * public Board()
- * public void addToken(Player i_currentPlayer)
- * public void updatePoints()
- * public void restartBoard()
- * 
- * 
- * 
- */
