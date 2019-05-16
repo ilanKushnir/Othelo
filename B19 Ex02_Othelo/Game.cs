@@ -24,7 +24,6 @@ namespace B19_Ex02_Othelo
             m_gameBoard = new Board(boardSize);
             m_CurrentPlayer = m_Player1;
             Display.updateUI("Game is set, please wait a second", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
-            startGame();
         }
 
         public void startGame()
@@ -32,7 +31,7 @@ namespace B19_Ex02_Othelo
             List<Coordinates> legalCoordinates;
             Coordinates playerCoordinates;
             string coordinatesStr;
-            bool isCoordinatesInArray;
+            bool isCoordinatesInArray, isLegalCoordinate;
 
             while (isGameOver() == false)
             {
@@ -53,11 +52,18 @@ namespace B19_Ex02_Othelo
                 // if its computer's turn on single player
                 if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)
                 {
+                    int randomCoordinateIndex = 0;
                     Display.updateUI("Computer's turn." + Environment.NewLine + "choosing coordinates...", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                     RandomWait(1, 3);
-                    Random random = new Random();
-                    int randomCoordinateIndex = random.Next(legalCoordinates.Count);
-                    playerCoordinates = legalCoordinates[randomCoordinateIndex];
+
+                    // if there is more than one legal coordinate in the given array - use random choice
+                    if (legalCoordinates.Count > 1)
+                    {
+                        Random random = new Random();
+                        randomCoordinateIndex = random.Next(legalCoordinates.Count);
+                    }
+
+                        playerCoordinates = legalCoordinates[randomCoordinateIndex];
                 }
                 else
                 {
@@ -71,14 +77,23 @@ namespace B19_Ex02_Othelo
                     }
 
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+                    isLegalCoordinate = playerCoordinates.isLegalCoordinate(m_gameBoard.Size);
                     isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
 
                     // check player coordinates validity
-                    while (isCoordinatesInArray == false || playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false)      
+                    while (isLegalCoordinate == false || isCoordinatesInArray == false)      
                     {
-                        Display.updateUI("illegal cell choice, Please choose again using format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                        if(isLegalCoordinate == false)
+                        {
+                            Display.updateUI("illegal cell choice, Please choose again using the specify format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                        }
+                        else
+                        {
+                            Display.updateUI("Selected cell is not an optional move! Please choose a cell from the available moves apear on the board\nUse the specify format: {Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                        }
                         coordinatesStr = Console.ReadLine();
                         playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
+                        isLegalCoordinate = playerCoordinates.isLegalCoordinate(m_gameBoard.Size);
                         isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
                     }
                 }
@@ -139,7 +154,7 @@ namespace B19_Ex02_Othelo
             m_Player1.LegalMovesCount = -1;
             m_Player2.Points = 0;
             m_Player2.LegalMovesCount = -1;
-            Display.updateUI("New game! {0} takes first turn" + m_CurrentPlayer, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+            Display.updateUI("New game! " + m_CurrentPlayer.Name + " takes first turn", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
             this.startGame();
         }
 

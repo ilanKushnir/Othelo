@@ -195,19 +195,19 @@ namespace B19_Ex02_Othelo
             {
                 if(i_WinningPlayer == i_player1)
                 {
-                    printMessage("Congratulations {0}, you won!" + i_WinningPlayer);
+                    printMessage("Congratulations " + i_WinningPlayer.Name + ", you won!");
                 }
                 else
                 {
-                    printMessage("{0} you lost, maybe next time" + i_player1);
+                    printMessage(i_player1.Name + " you lost, maybe next time");
                 }
             }
             else
             {                                                                       // its multiplayer and its not a tie
-                printMessage("Congratulations {0}, you won!" + i_WinningPlayer);
+                printMessage("Congratulations " + i_WinningPlayer.Name + ", you won!");
             }
 
-            printMessage("Restart Game?\ninsert y/n" + i_WinningPlayer);
+            printMessage("Restart Game?\ninsert y/n");
             restartGame = char.Parse(Console.ReadLine());
 
             if(restartGame == 'y' || restartGame == 'Y')
