@@ -5,10 +5,10 @@ using System.Text;
 
 namespace B19_Ex02_Othelo
 {
-    class Coordinates
+    public class Coordinates
     {
-        int      m_Row = -1;
-        int      m_Col = -1;
+        private int m_Row = -1;
+        private int m_Col = -1;
 
         public Coordinates(int i_Row, int i_Col)
         {
@@ -22,6 +22,7 @@ namespace B19_Ex02_Othelo
             {
                 return m_Row;
             }
+
             set
             {
                 m_Row = value;
@@ -34,6 +35,7 @@ namespace B19_Ex02_Othelo
             {
                 return m_Col;
             }
+
             set
             {
                 m_Col = value;
@@ -54,14 +56,8 @@ namespace B19_Ex02_Othelo
             return true;
         }
 
-        public bool isLegalCoordinate(int i_BoardSize)
-        {
-            return isLegalCoordinate(m_Row, m_Col, i_BoardSize);
-        }
-
         public static bool foundCoordinatesInArray(Coordinates i_Coordinates, List<Coordinates> i_CoordinatesArray)
         {
-
             if(i_Coordinates == null)
             {
                 return false;
@@ -112,14 +108,15 @@ namespace B19_Ex02_Othelo
             else
             {                                    // assuming that board measures issue (6*6 instead 8*8) or illegal value will be taken care of in 'isLegalCoordinate'
                 collValue = coll - '0' - 1;
-
             }
 
             o_Coordinates = new Coordinates(rowValue, collValue);
             return o_Coordinates;
         }
 
-
-
+        public bool isLegalCoordinate(int i_BoardSize)
+        {
+            return isLegalCoordinate(m_Row, m_Col, i_BoardSize);
+        }
     }
 }

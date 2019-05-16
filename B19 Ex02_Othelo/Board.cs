@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B19_Ex02_Othelo
 {
-    class Board
+    public class Board
     {
         private int m_BoardSize = 0;
         private int[,] m_Board = null;
@@ -207,35 +207,7 @@ namespace B19_Ex02_Othelo
                 row += (S - N);
                 col += (E - W);
             }
-/*
-            for (()
 
-            for (int row = inDirection.Row; (row < m_BoardSize) && (row >= 0); row += (S - N))
-            {
-                for (int col = inDirection.Col; (col < m_BoardSize) && (col >=0); col += (E - W))
-                {
-                    if (m_Board[row, col] == 0 || m_Board[row, col] == 2)
-                    {
-                        return null;
-                    }
-
-                    if (m_Board[row, col] == (int)i_currentPlayer.Color)
-                    {
-                        return counterDirection;
-                    }
-
-                    if (E == 0 && W ==0)
-                    {
-                        break;
-                    }
-                }
-
-                if (N == 0 && S == 0)
-                {
-                    break;
-                }
-            }
-            */
             return null;
         }
 

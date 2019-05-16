@@ -5,12 +5,11 @@ using System.Text;
 
 namespace B19_Ex02_Othelo
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
             Game x = new Game();
         }
-
     }
 }

@@ -5,12 +5,12 @@ using System.Text;
 
 namespace B19_Ex02_Othelo
 {
-    class Game
+    public class Game
     {
-        public Player       m_Player1 = null;               
-        public Player       m_Player2 = null;
-        public Player       m_CurrentPlayer = null;        
-        Board               m_gameBoard;
+        public Player m_Player1 = null;               
+        public Player m_Player2 = null;
+        public Player m_CurrentPlayer = null;        
+        public Board m_gameBoard;
 
         public Game()
         {
@@ -40,8 +40,9 @@ namespace B19_Ex02_Othelo
                 legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);      // check available options for next move
                 m_CurrentPlayer.LegalMovesCount = legalCoordinates.Count;
 
-                if(m_CurrentPlayer.LegalMovesCount == 0)                                        // if no available moves the other player takes the turn
-                {
+                // if no available moves the other player takes the turn
+                if (m_CurrentPlayer.LegalMovesCount == 0)
+                { 
                     switchPlayer();
                     legalCoordinates = m_gameBoard.getCurrentLegalMovesArray(m_CurrentPlayer, otherPlayer);      // check available options for next move
                     m_CurrentPlayer.LegalMovesCount = legalCoordinates.Count;
@@ -49,20 +50,29 @@ namespace B19_Ex02_Othelo
 
                 m_gameBoard.addCurrentLegalMovesToBoard(legalCoordinates);
 
-                if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)                    // if its computer's turn on single player
+                // if its computer's turn on single player
+                if (m_Player2.IsBot == true && m_CurrentPlayer == m_Player2)
                 {
                     Random random = new Random();
-                    int randomCoordinateIndex = random.Next(legalCoordinates.Count);     // -1 ???
+                    int randomCoordinateIndex = random.Next(legalCoordinates.Count);
                     playerCoordinates = legalCoordinates[randomCoordinateIndex];
                 }
                 else
                 {
                     Display.updateUI(m_CurrentPlayer.Name + " , Please choose cell in the following format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                     coordinatesStr = Console.ReadLine();
+
+                    // if user asked to quit game
+                    if (coordinatesStr[0] == 'q' || coordinatesStr[0] == 'Q') 
+                    {
+                        endGame();
+                    }
+
                     playerCoordinates = Coordinates.parseCoordinates(coordinatesStr);
                     isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
 
-                    while (isCoordinatesInArray == false|| playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false)      // check player coordinates validity
+                    // check player coordinates validity
+                    while (isCoordinatesInArray == false || playerCoordinates.isLegalCoordinate(m_gameBoard.Size) == false)      
                     {
                         Display.updateUI("illegal cell choice, Please choose again using format: \n{Row number},{Col letter}", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                         coordinatesStr = Console.ReadLine();
@@ -70,9 +80,10 @@ namespace B19_Ex02_Othelo
                         isCoordinatesInArray = Coordinates.foundCoordinatesInArray(playerCoordinates, legalCoordinates);
                     }
                 }
+
                 m_gameBoard.addToken(m_CurrentPlayer, otherPlayer, playerCoordinates);       // mark chosen cell on board
                 updatePoints();
-                Display.updateUI("", m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+                Display.updateUI(string.Empty, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
                 switchPlayer();
             }
 
@@ -121,12 +132,12 @@ namespace B19_Ex02_Othelo
 
             Ex02.ConsoleUtils.Screen.Clear();
             m_gameBoard = new Board(boardSize);         // restart board
-            m_CurrentPlayer = i_WinningPlayer;
+            m_CurrentPlayer = i_WinningPlayer == null ? m_Player1 : i_WinningPlayer;
             m_Player1.Points = 0;                       // restart players information
-            m_Player1.LegalMovesCount = 0;
+            m_Player1.LegalMovesCount = -1;
             m_Player2.Points = 0;
-            m_Player2.LegalMovesCount = 0;
-            Display.updateUI("New game! {0} takes first turn" + i_WinningPlayer.Name, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
+            m_Player2.LegalMovesCount = -1;
+            Display.updateUI("New game! {0} takes first turn" + m_CurrentPlayer, m_CurrentPlayer, m_Player1, m_Player2, m_gameBoard);
             this.startGame();
         }
 
@@ -151,10 +162,11 @@ namespace B19_Ex02_Othelo
             {
                 for (int j = 0; j < m_gameBoard.Size; j++)
                 {
-                    if(m_gameBoard.getTokenByMatrixCoordinate(i,j) == 1)
+                    if(m_gameBoard.getTokenByMatrixCoordinate(i, j) == 1)
                     {
                         black++;
                     }
+
                     if (m_gameBoard.getTokenByMatrixCoordinate(i, j) == -1)
                     {
                         white++;
@@ -172,13 +184,3 @@ namespace B19_Ex02_Othelo
         }
     }
 }
-
-/* 
- * 
- * public Game()
- * public void startGame()
- * public bool isGameOver()
- * public void endGame()
- * public void restartGame()
- * 
- */

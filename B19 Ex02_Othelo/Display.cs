@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B19_Ex02_Othelo
 {
-    class Display
+    public class Display
     {
         public static void printUI(string message, Player currentPlayer, Player player1, Player player2, Board gameBoard)
         {
@@ -19,6 +19,7 @@ namespace B19_Ex02_Othelo
             printDivider(0);
             // input goes here
         }
+
         public static void printDivider(int boardSize = 0)
         {
             if (boardSize != 0)
@@ -35,18 +36,22 @@ namespace B19_Ex02_Othelo
                 Console.WriteLine();
             }
         }
+
         public static void printTitle()
         {
             Console.WriteLine("Othelo - by Ofir & Ilan");
         }
+
         public static void printMessage(string message)
         {
             Console.WriteLine("Message: {0}", message);
         }
+
         public static void printStats(Player currentPlayer, Player player1, Player player2)
         {
             Console.WriteLine("Turn:{0} || Points: P1:{1}, P2:{2}", currentPlayer.Name, player1.Points, player2.Points);
         }
+
         public static void printBoard(Board i_Board)
         {
             int i, j, k, currentCellToken, boardSize = i_Board.Size;
@@ -64,6 +69,7 @@ namespace B19_Ex02_Othelo
             {
                 Console.Write("====");
             }
+
             Console.WriteLine();
 
             // Counted lines section
@@ -89,8 +95,10 @@ namespace B19_Ex02_Othelo
                     {
                         charToPrint = ' ';
                     }
+
                     Console.Write("| {0} ", charToPrint);
                 }
+
                 Console.WriteLine("|");
 
                 // Print  line divider
@@ -99,10 +107,11 @@ namespace B19_Ex02_Othelo
                 {
                     Console.Write("====");
                 }
+
                 Console.WriteLine("=");
             }
-
         }
+
         public static void updateUI(string message, Player currentPlayer, Player player1, Player player2, Board gameBoard)
         {
             // Delay if bot's turn
@@ -121,6 +130,7 @@ namespace B19_Ex02_Othelo
                 Console.WriteLine("Please choose 1 or 2");
                 boardSizeChoice = int.Parse(Console.ReadLine());
             }
+
             i_BoardSize = boardSizeChoice == 1 ? 6 : 8;
 
             Display.printDivider(i_BoardSize);
@@ -134,6 +144,7 @@ namespace B19_Ex02_Othelo
                 Console.WriteLine("Please choose 1 or 2");
                 isMultiplayerInput = int.Parse(Console.ReadLine());
             }
+
             i_isMultiplayer = isMultiplayerInput == 1 ? false : true;
 
             Display.printDivider(i_BoardSize);

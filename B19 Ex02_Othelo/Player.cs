@@ -3,26 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
-
-
 namespace B19_Ex02_Othelo
 {
-    enum ePlayerColor
+    public enum ePlayerColor
     {
         White = -1,
         Black = 1
     }
 
-    class Player
+    public class Player
     {
-
-        private string       m_Name = null;
-        private int          m_Points = 0;
+        private string m_Name = null;
+        private int m_Points = 0;
         private ePlayerColor m_Color;
-        private bool         m_isBot = false;
-        private int          m_LegalMovesCount = -1;
-
+        private bool m_isBot = false;
+        private int m_LegalMovesCount = -1;
 
         public Player(string i_Name, ePlayerColor i_Color, bool i_isBot)
         {
@@ -53,6 +48,7 @@ namespace B19_Ex02_Othelo
             {
                 return m_Points;
             }
+
             set
             {
                 m_Points = value;
@@ -65,6 +61,7 @@ namespace B19_Ex02_Othelo
             {
                 return m_LegalMovesCount;
             }
+
             set
             {
                 m_LegalMovesCount = value;
@@ -80,4 +77,3 @@ namespace B19_Ex02_Othelo
         }
     }
 }
-
