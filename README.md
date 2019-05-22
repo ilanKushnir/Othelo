@@ -18,8 +18,15 @@ The idea was to practice OOP, C#'s Arrays and other collection classes and using
 - OOP 
 - Arrays
 - Lists
-- Dll
+- Using outer Dll
 - string
+- C# syntax
+- Microsoft Visual Studio .NET dev tools
+- Access modifiers
+- Constructors
+- Properties
+- Indexers
+
 
 After submission we've improved more the styling and the classes organization.
 
@@ -39,8 +46,9 @@ Completed
 
 - Authors: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>, <a href="mailto:ofir5300@gmail.com" target="_blank">Ofir Cohen</a>
 - Logo & Design: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>
-- Instructor: Guy Ronen
-- The Academic College of Tel Aviv - Yaffo
+- Instructor: <a href="https://www.facebook.com/guy.ronen" target="_blank">Guy Ronen</a>
+- <a href="https://www.mta.ac.il/" target="_blank">The Academic College of Tel Aviv - Yaffo</a>
+
 
 <h2>Copyright</h2>
 This project is licensed under the terms of the MIT license 
