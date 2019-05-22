@@ -1,46 +1,46 @@
 <div align="center"><img src="design/Logo.png"></div>
-<h1 align="center">Name</h1>
-<p align="center"><strong>Description</strong>
-<br>Comment</p>
+<h1 align="center">Othelo</h1>
+<p align="center"><strong>Console Edition - by Ilan & Ofir</strong>
+<br>Students project for C# & .Net Framework course - The Academic College of Tel Aviv - Yaffo</p>
 <br/>
 <div align="center"><img src="design/Demo.png"></img></div>
 <h2>About</h2>
-Context and progress go here
+This is an Othelo game, coded using C# for our CS degree.
+<br/>We built the console edition and will expand its UI in the near future...
+<br/>Have fun and try to beat the PC ;)
 
 <h2>Goal and requirements</h2>
 
-The idea behind first implementation. What is expected, what should be included, what should not be included.
+The idea was to practice OOP, C#'s Arrays and other collection classes and using an outer assembly in the project.
 
 <h2>Key learnings</h2>
 
-- Be 
-- clear
-- brief 
-- and 
-- concise
+- OOP 
+- Arrays
+- Lists
+- Dll
+- string
 
-If project has been improved after submission, here is a good place to specify it.
+After submission we've improved more the styling and the classes organization.
 
 <h2>Installation</h2>
 
 1. Download this project as zip and extract it
-2. Import it in Android Studio
-3. Sync Gradle and run on your device/emulator
-
-Or use <a href="https://github.com/cesarferreira/dryrun" target="_blank">`dryrun`</a> by <a href="https://github.com/cesarferreira" target="_blank">@CesarFerreira</a>
+2. Run the .exe file
+3. Play!
 
 <h2>Contributing</h2>
-Mention pull requests. Link to an example and/or put it down here
+no need for now :)
 
 <h2>Project status</h2>
-Insert here
+Completed
 
 <h2>Credits</h2>
 
-- Author: <a href="https://twitter.com/r4dixx" target="_blank">Amaël Sikel</a>
-- Illustrations
-- Colors
-- Any material
+- Authors: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>, <a href="mailto:ofir5300@gmail.com" target="_blank">Ofir Cohen</a>
+- Logo & Design: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>
+- Instructor: Guy Ronen
+- The Academic College of Tel Aviv - Yaffo
 
 <h2>Copyright</h2>
-This project is licensed under the terms of the MIT license and protected by Udacity Honor Code and Community Code of Conduct. See <a href="LICENSE.md">license</a> and <a href="LICENSE.DISCLAIMER.md">disclaimer</a>.
+This project is licensed under the terms of the MIT license 
